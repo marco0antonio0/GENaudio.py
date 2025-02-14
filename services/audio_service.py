@@ -1,5 +1,5 @@
 import os
-import uuid  # ✅ Adicionado para corrigir o erro
+import uuid
 import asyncio
 from repositories.audio_repository import gerar_audio
 from config.settings import AUDIO_DIR, VOICES, VELOCIDADES
@@ -13,9 +13,19 @@ def processar_audio(texto: str, voz_key: str, velocidade: str, modo: str):
         raise ValueError(f"Velocidade inválida! Escolha entre: {', '.join(VELOCIDADES)}")
 
     voz = VOICES[voz_key]
-    filename = f"{AUDIO_DIR}/audio_{uuid.uuid4().hex}.mp3"  # ✅ Agora o UUID está definido corretamente
+    filename = f"{AUDIO_DIR}/audio_{uuid.uuid4().hex}.mp3"
 
     # Executar a geração do áudio de forma assíncrona
     asyncio.run(gerar_audio(texto, filename, voz, velocidade))
 
     return filename, modo
+
+
+def listar_vozes():
+    """Retorna todas as vozes disponíveis."""
+    return VOICES
+
+
+def listar_velocidades():
+    """Retorna todas as velocidades disponíveis."""
+    return VELOCIDADES
