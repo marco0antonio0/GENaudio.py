@@ -28,7 +28,7 @@ audio_bp = Blueprint("audio", __name__)
     ]
 })
 def gerar_audio():
-    """Endpoint para gerar áudio e retornar para reprodução ou download."""
+    """Endpoint para gerar áudio sem persistência e retornar para reprodução ou download."""
     data = request.json
     texto = data.get("texto")
     voz_key = data.get("voz", "antonio").lower()
@@ -39,11 +39,11 @@ def gerar_audio():
         return jsonify({"erro": "O campo 'texto' é obrigatório!"}), 400
 
     try:
-        filename, modo = processar_audio(texto, voz_key, velocidade, modo)
+        audio_bytes = processar_audio(texto, voz_key, velocidade)
     except ValueError as e:
         return jsonify({"erro": str(e)}), 400
 
-    return send_file(filename, mimetype="audio/mpeg") if modo == "play" else send_file(filename, as_attachment=True)
+    return send_file(audio_bytes, mimetype="audio/mpeg") if modo == "play" else send_file(audio_bytes, as_attachment=True, download_name="audio.mp3")
 
 
 @audio_bp.route("/listar-vozes", methods=["GET"])
