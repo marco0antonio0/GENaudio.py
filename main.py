@@ -14,4 +14,4 @@ init_swagger(app)
 app.register_blueprint(audio_bp)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=(FLASK_ENV == "development"))
+    app.run(host="0.0.0.0", port=3000, debug=(FLASK_ENV == "development"))

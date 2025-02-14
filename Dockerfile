@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install python-dotenv
 
 # Expõe a porta 5000 para acesso à API
-EXPOSE 5000
+EXPOSE 3000
 
 # Define a variável de ambiente para desativar o buffer de saída
 ENV PYTHONUNBUFFERED=1
