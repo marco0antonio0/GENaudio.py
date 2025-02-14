@@ -15,9 +15,7 @@ os.makedirs(AUDIO_DIR, exist_ok=True)
 VOICES = {
     "antonio": "pt-BR-AntonioNeural",
     "francisca": "pt-BR-FranciscaNeural",
-    "daniel": "pt-BR-DanielNeural",
-    "maria": "pt-BR-MariaNeural"
 }
 
 # Velocidades permitidas
-VELOCIDADES = ["-50%", "-25%", "-10%", "0%", "+10%", "+25%", "+50%"]
+VELOCIDADES = ["-50%", "-25%", "-10%", "+10%", "+25%", "+50%"]

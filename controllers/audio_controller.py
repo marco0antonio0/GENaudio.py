@@ -9,6 +9,7 @@ audio_bp = Blueprint("audio", __name__)
 @swag_from({
     "tags": ["Áudio"],
     "summary": "Gera um áudio a partir de um texto e retorna para reprodução ou download",
+    "description": "Este endpoint gera um áudio a partir do texto informado, podendo incluir pausas customizadas.",
     "parameters": [
         {
             "name": "body",
@@ -17,15 +18,52 @@ audio_bp = Blueprint("audio", __name__)
             "schema": {
                 "type": "object",
                 "properties": {
-                    "texto": {"type": "string", "example": "Olá! Este é um teste de áudio."},
-                    "voz": {"type": "string", "enum": list(VOICES.keys()), "example": "antonio"},
-                    "velocidade": {"type": "string", "enum": VELOCIDADES, "example": "+10%"},
-                    "modo": {"type": "string", "enum": ["play", "download"], "example": "play"}
+                    "texto": {
+                        "type": "string",
+                        "example": "Olá! Este é um teste <pausa-curta/> de áudio. Agora uma pausa maior <pausa-media/> e uma bem longa <pausa-longa/> antes do fim.",
+                        "description": (
+                            "Texto que será convertido em áudio. Você pode incluir pausas personalizadas no texto:\n"
+                            "- `<pausa-curta/>`: Pequena pausa (~0,5s)\n"
+                            "- `<pausa-media/>`: Pausa média (~1s)\n"
+                            "- `<pausa-longa/>`: Pausa longa (~2s)\n"
+                        )
+                    },
+                    "voz": {
+                        "type": "string",
+                        "enum": list(VOICES.keys()),
+                        "example": "antonio"
+                    },
+                    "velocidade": {
+                        "type": "string",
+                        "enum": VELOCIDADES,
+                        "example": "+10%"
+                    },
+                    "modo": {
+                        "type": "string",
+                        "enum": ["play", "download"],
+                        "example": "play"
+                    }
                 },
                 "required": ["texto"]
             }
         }
-    ]
+    ],
+    "responses": {
+        200: {
+            "description": "Áudio gerado com sucesso.",
+            "content": {
+                "audio/mpeg": {
+                    "schema": {
+                        "type": "string",
+                        "format": "binary"
+                    }
+                }
+            }
+        },
+        400: {
+            "description": "Erro na requisição (ex: campo obrigatório ausente)."
+        }
+    }
 })
 def gerar_audio():
     """Endpoint para gerar áudio sem persistência e retornar para reprodução ou download."""
