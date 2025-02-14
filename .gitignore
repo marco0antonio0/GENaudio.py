@@ -1,0 +1,27 @@
+# Ignorar o ambiente virtual Python
+.venv/
+venv/
+
+# Ignorar arquivos de áudio gerados
+audio.mp3
+audios/
+
+# Ignorar arquivos de cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar variáveis de ambiente e configurações sensíveis
+.env
+
+# Ignorar arquivos de log e temporários
+*.log
+*.tmp
+
+# Ignorar diretórios criados pelo IDE (VSCode, PyCharm, etc.)
+.vscode/
+.idea/
+
+# Ignorar dependências instaladas localmente
+pip-wheel-metadata/
