@@ -71,7 +71,7 @@ def gerar_audio():
     texto = data.get("texto")
     voz_key = data.get("voz", "antonio").lower()
     velocidade = data.get("velocidade", "0%")
-    modo = data.get("modo", "play").lower()
+    modo = data.get("modo", "donwload").lower()
 
     if not texto:
         return jsonify({"erro": "O campo 'texto' é obrigatório!"}), 400
