@@ -41,7 +41,7 @@ audio_bp = Blueprint("audio", __name__)
                     "modo": {
                         "type": "string",
                         "enum": ["play", "download"],
-                        "example": "play"
+                        "example": "download"
                     }
                 },
                 "required": ["texto"]
